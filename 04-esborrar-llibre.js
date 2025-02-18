@@ -30,28 +30,36 @@ class MyTest extends BaseTest
         sendButton.click();
 
 
-        // //4 comprovem que hem entrat
-        // let logoutButton = await this.driver.wait(until.elementLocated(By.xpath('//button[@type="submit"]')), 10000);
-        // let logoutText = await logoutButton.getText();
-        // var expectedText = "FINALITZAR SESSIÓ";
-        // assert(logoutText==expectedText, "Login fallit");
+        //4 entrar en Llibres
+        let linkLlibres = await this.driver.wait(until.elementLocated(By.xpath('//a[@href="/admin/biblio/llibre/"]')), 10000);
+        linkLlibres.click();
+
+        
+        //5 entrar al meu llibre i el link
+        const row = await this.driver.wait(
+            until.elementLocated(By.xpath("//tr[contains(., 'Mar Melich')]")),
+            10000
+        );
+
+        const linkRow = await row.findElement(By.css('a'));
+        await linkRow.click();
 
 
-        //5 click en afegir llibre
-        let trLLibres = await this.driver.wait(until.elementLocated(By.xpath('//a[@href="/admin/biblio/llibre/add/"]')), 10000);
-        trLLibres.click();
 
-
-        //6 escriure títol
-        let titolInput = await this.driver.wait(until.elementLocated(By.id('id_titol')), 10000);
-        titolInput.sendKeys("Mar");
-
-        //7 click en DESAR
-        let saveButton = await this.driver.wait(
-            until.elementLocated(By.xpath('//input[@type="submit" and @value="Desar"]')),
+        //6 click en Esborrar
+        let deleteButton = await this.driver.wait(
+            until.elementLocated(By.css('a.deletelink')),
             15000
         );
-        saveButton.click();
+        
+        deleteButton.click();
+
+        //7 click en estic segur
+        let confirmButton = await this.driver.wait(
+            until.elementLocated(By.xpath('//input[@type="submit" and @value="Sí, n\'estic segur"]')),
+            15000
+        );
+        confirmButton.click();
 
 
 
