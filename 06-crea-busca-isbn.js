@@ -43,7 +43,6 @@ class MyTest extends BaseTest
         await this.driver.sleep(8000);
 
         //6 Desar
-        
         await this.driver.findElement(By.xpath("//input[@value='Desar']")).click();
 
         console.log("TEST OK");
